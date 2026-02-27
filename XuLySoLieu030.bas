@@ -1,6 +1,6 @@
 Attribute VB_Name = "ThuThuat0YHCT0BSHoang"
-Sub ALL_XuLySoLieu()    'Ctrl+Shift+D
-Attribute ALL_XuLySoLieu.VB_ProcData.VB_Invoke_Func = "D\n14"
+Sub XuLySoLieu_ALL() 'Ctrl+Shift+D
+Attribute XuLySoLieu_ALL.VB_ProcData.VB_Invoke_Func = "D\n14"
 Dim i As Variant
 Dim str As String
 Dim strx As String
@@ -65,6 +65,11 @@ Str2 = ""
    
 Sheets("So Phau thuat").Select
 
+'Columns("H:I").Copy    'Th√™m c√¥t X√≥a C√¥t
+'Columns("AU:AU").Paste 'X√≥a B√™nh Ch√≠nh B√™nh Phu
+'Columns("H:I").Delete Shift:=xlToLeft
+
+
 Columns(14).Insert Shift:=xlToRight
 Columns(14).Insert Shift:=xlToRight
 Columns(14).Insert Shift:=xlToRight
@@ -111,7 +116,7 @@ Columns(9).Insert Shift:=xlToRight
     Cells(6, 28) = "1Nv-nBN"
     Cells(6, 29) = "NoTruc"
     Cells(6, 30) = "NgTruc"
-    Cells(6, 31) = "Ch‚mTruc"
+    Cells(6, 31) = "Ch√¢mTruc"
     Cells(6, 32) = "FixTT"  'Chua Biet Lam Gi
     Cells(6, 33) = "CCHN"
     Cells(6, 34) = "."
@@ -168,6 +173,7 @@ Cells(5, 24) = "Blank"
 Cells(5, 27) = "#1"
 Cells(5, 28) = "#1"
 Cells(5, 29) = "Value"
+Cells(5, 33) = "Sai"
     
 'Tao Cacche1
 Call Cacche1
@@ -189,7 +195,7 @@ While Cells(i, 8) <> ""
         'Format thoi gian lam
             Cells(i, 15).FormulaR1C1 = "=DATE(YEAR(RC[-2]),MONTH(RC[-2]),DAY(RC[-2]))"
             'Cells(i, 18) = Left(Cells(i, 11), 10)
-        'Time v‡o - time ra
+        'Time v√†o - time ra
             Cells(i, 17) = Cells(i, 14) - Cells(i, 13)
             Cells(i, 9).FormulaR1C1 = "=bo_dau_tieng_viet(RC[3])"
             Cells(i, 24).FormulaR1C1 = "=bo_dau_tieng_viet(RC[1])"
@@ -222,6 +228,8 @@ While Cells(i, 8) <> ""
 Wend
 i = 0
 str = ""
+Sheets("Cacche1").Cells(6, 15) = m
+
 
 Call PasteValueH(strx, m)
 
@@ -232,12 +240,12 @@ Call CCHN_Error(m)
 Call ShortNameTT(strx, m, ww)
 
 'Loc trung gio2
-Application.Calculation = xlCalculationAutomatic 'C·i n‡y de tinh Automatic moi coppy/paste duoc
+Application.Calculation = xlCalculationAutomatic 'C√°i n√†y de tinh Automatic moi coppy/paste duoc
        Cells(7, 27).Value = _
-            "=COUNTIFS($B$7:$B$" & m - 1 & ",B7,$T$7:$T$" & m - 1 & ","">""&S7,$S$7:$S$" & m - 1 & ",""<""&T7,$Y$7:$Y$" & m - 1 & ",""<>""&Y7)+COUNTIFS($B$7:$B$" & m - 1 & ",B7,$T$7:$T$" & m - 1 & ","">""&S7,$S$7:$S$" & m - 1 & ",""<""&T7)" 'Loc cot Phu second = 00
+            "=COUNTIFS($B$7:$B$" & m - 1 & ",B7,$C$7:$C$" & m - 1 & ",C7,$T$7:$T$" & m - 1 & ","">""&S7,$S$7:$S$" & m - 1 & ",""<""&T7,$Y$7:$Y$" & m - 1 & ",""<>""&Y7)+COUNTIFS($B$7:$B$" & m - 1 & ",B7,$C$7:$C$" & m - 1 & ",C7,$T$7:$T$" & m - 1 & ","">""&S7,$S$7:$S$" & m - 1 & ",""<""&T7)" 'Loc cot Phu second = 00
        Range("AA7").AutoFill Destination:=Range("AA7:AA" & m - 1)
        Cells(7, 28).Value = _
-            "=COUNTIFS($Y$7:$Y$" & m - 1 & ",Y7,$T$7:$T$" & m - 1 & ","">""&S7,$S$7:$S$" & m - 1 & ",""<""&T7,$B$7:$B$" & m - 1 & ",""<>""&B7)+COUNTIFS($Y$7:$Y$" & m - 1 & ",Y7,$T$7:$T$" & m - 1 & ","">""&S7,$S$7:$S$" & m - 1 & ",""<""&T7)" 'Loc cot Phu second = 00
+            "=COUNTIFS($Y$7:$Y$" & m - 1 & ",Y7,$T$7:$T$" & m - 1 & ","">""&S7,$S$7:$S$" & m - 1 & ",""<""&T7,$B$7:$B$" & m - 1 & ",""<>""&B7,$C$7:$C$" & m - 1 & ",""<>""&C7)+COUNTIFS($Y$7:$Y$" & m - 1 & ",Y7,$T$7:$T$" & m - 1 & ","">""&S7,$S$7:$S$" & m - 1 & ",""<""&T7)" 'Loc cot Phu second = 00
        Range("AB7").AutoFill Destination:=Range("AB7:AB" & m - 1)
        'Sum TimeBH
        Cells(7, 21).Value = "=SUMIFS($K$7:$K$" & m - 1 & ",$Y$7:$Y$" & m - 1 & ",Y7,$O$7:$O$" & m - 1 & ",O7)"
@@ -245,19 +253,19 @@ Application.Calculation = xlCalculationAutomatic 'C·i n‡y de tinh Automatic moi 
        'Dem loc trung gio
        'Cells(7, 33).Value = "=AA7+AB7"
        
-Application.Calculation = xlCalculationManual 'Het lenh C·i n‡y de tinh Automatic moi coppy/paste duoc
+Application.Calculation = xlCalculationManual 'Het lenh C√°i n√†y de tinh Automatic moi coppy/paste duoc
     
-    Range("AA7:AB" & m - 1).Copy 'Ctrl+Shift+D thÏ bo lenh copy 2lenh
+    Range("AA7:AB" & m - 1).Copy 'Ctrl+Shift+D th√¨ bo lenh copy 2lenh
     Range("AA7").PasteSpecial Paste:=xlPasteValues, Operation:=xlNone, SkipBlanks:=False, Transpose:=False
     Range("U7:U" & m - 1).Copy
     Range("U7").PasteSpecial Paste:=xlPasteValues, Operation:=xlNone, SkipBlanks:=False, Transpose:=False
-'HÍt Loc trung gio2
+'H√™t Loc trung gio2
 
 'Tich nham nguoi khong truc
 Call NoTruc(strx, m, ww)
 
 'Color
-Call CoLor(m)
+Call Color(m)
 
 'So Luong BN theo ngay
 Call BN_Date(strx, m, ww)
@@ -313,13 +321,13 @@ Call BN_Date(strx, m, ww)
         .Position = 1
     End With
     With ActiveSheet.PivotTables("PivotTableH").PivotFields("TenDv")
-        .Orientation = xlColumnField  'l‚n 1
+        .Orientation = xlColumnField  'l√¢n 1
         .Position = 1
     End With
     ActiveSheet.PivotTables("PivotTableH").AddDataField ActiveSheet.PivotTables( _
         "PivotTableH").PivotFields("TenDv"), "Count of TenDv", xlCount
     With ActiveSheet.PivotTables("PivotTableH").PivotFields("TenDv")
-        .Orientation = xlColumnField 'l‚n 2
+        .Orientation = xlColumnField 'l√¢n 2
         .Position = 1
     End With
     'With ActiveSheet.PivotTables("PivotTableH").PivotFields("LoaiDv")
@@ -376,14 +384,22 @@ Call BN_Date(strx, m, ww)
         .Position = 1
     End With
     ActiveSheet.PivotTables("PivotTableHH").AddDataField ActiveSheet.PivotTables( _
-        "PivotTableHH").PivotFields("TimeBH"), "Sum of TimeBH", xlSum 'L‚n 1
+        "PivotTableHH").PivotFields("TimeBH"), "Sum of TimeBH", xlSum 'L√¢n 1
 
     ActiveSheet.PivotTables("PivotTableHH").AddDataField ActiveSheet.PivotTables( _
-        "PivotTableHH").PivotFields("TimeBH"), "Sum of TimeBH", xlSum  'L‚n 2
+        "PivotTableHH").PivotFields("TimeBH"), "Sum of TimeBH", xlSum  'L√¢n 2
         
     Range("B31:B55").NumberFormat = "[h]:mm;@"
-'HÍt PivotH
-Cells(1, 5) = "Chu y Ù: Blank"
+'H√™t PivotH
+Cells(1, 5) = "Chu y √¥: Blank"
+Call NameH
+
+
+    'Columns("AU:AV").Select
+    'Application.CutCopyMode = False
+    'Selection.Copy
+    'Columns("H:H").Insert Shift:=xlToRight 'Chuyen Benh Chinh Benh Phu
+
 
 Sheets("So Phau thuat").Select
 Cells(1, 1).Select
@@ -393,7 +409,7 @@ Application.ScreenUpdating = True
 Application.Calculation = xlCalculationAutomatic
 End Sub
 
-Sub XuLySoLieu_DuLieu(strx As String) 'Ctrl+Shift+
+Sub XuLySoLieu_DuLieu(strx As String)
 Dim i As Variant
 Dim j As Variant
 Dim m As Variant
@@ -428,6 +444,22 @@ Str2 = ""
    
 Sheets("DuLieu").Select
 
+'Xoa thu thuat khong phai YHCT-PHCN
+'Application.Calculation = xlCalculationAutomatic
+    For i = 5 To 100
+    str = Left(Cells(i, 2), 3)
+        If str = "Y H" Then
+             j = i
+        End If
+    Next
+    For i = 1 To j - 8
+    Rows(8).Delete
+    Next
+    str = ""
+    j = 0
+'Application.Calculation = xlCalculationManual
+'Het xoa thu thuat khong phai YHCT-PHCN
+
 'Xoa data trang
     For i = 1 To 12
     Columns(16).Delete
@@ -440,6 +472,8 @@ Sheets("DuLieu").Select
     Rows(6).Delete
     Rows(5).RowHeight = 28
 'Het xoa data trang
+
+
 
 Columns(15).Insert Shift:=xlToRight
 Columns(15).Insert Shift:=xlToRight
@@ -480,8 +514,8 @@ Columns(10).Insert Shift:=xlToRight
     Cells(5, 22) = "LoaiDv"
     Cells(5, 23) = "LoaiNv"
     Cells(5, 24) = "TenNv"
-    Cells(5, 25) = "."
-    Cells(5, 26) = "."
+    Cells(5, 25) = ".NgPhu"
+    Cells(5, 26) = ".1BN-nNVp"
     Cells(5, 27) = "1BN-nNV"
     Cells(5, 28) = "1NV-nBN"
     Cells(5, 29) = "NoTruc"
@@ -513,6 +547,7 @@ Cells(4, 24) = "Blank"
 Cells(4, 27) = "#1"
 Cells(4, 28) = "#1"
 Cells(4, 29) = "Value"
+Cells(4, 33) = "Sai"
 
 Range("J:J").NumberFormat = "mm:ss"
 Range("Q:Q").NumberFormat = "[h]:mm:ss;@" 'Format gio phut giay
@@ -539,8 +574,8 @@ Columns("S:T").ColumnWidth = 0.5
 Columns("U:U").ColumnWidth = 3.8
 Columns("V:W").ColumnWidth = 4.5
 Columns("X:X").ColumnWidth = 12
-Columns("Y:Y").ColumnWidth = 0.5
-Columns("Z:Z").ColumnWidth = 1
+Columns("Y:Y").ColumnWidth = 12
+Columns("Z:Z").ColumnWidth = 8
 Columns("AJ:AK").ColumnWidth = 4.5
 Columns("AA:AI").EntireColumn.AutoFit
 Rows(5).AutoFilter
@@ -550,19 +585,6 @@ Call Cacche1
 ww = Sheets("Cacche1").Cells(5, 17)
 
 Sheets("DuLieu").Select
-'Xoa thu thuat khong phai YHCT-PHCN
-    For i = 9 To 100
-    str = Left(Cells(i, 2), 3)
-        If str = "Y H" Then
-             j = i
-        End If
-    Next
-    For i = 1 To j - 7
-    Rows(7).Delete
-    Next
-    str = ""
-    j = 0
-'Het xoa thu thuat khong phai YHCT-PHCN
 
 Cells(1, 2) = ""
 i = 7
@@ -572,12 +594,14 @@ While Cells(i, 5) <> ""
         If str <> "" Then
         'If str = "BHYT" Then
         'Chuyen ten nguoi lam ve dung cot
-            Cells(i, 35) = Left(Cells(i, 21), 50) & Left(Cells(i, 22), 50) & Left(Cells(i, 23), 50)
+            'Cells(i, 35) = Left(Cells(i, 21), 50) & Left(Cells(i, 22), 50) & Left(Cells(i, 23), 50)     'Thu Thuat 1 + Thu Thuat 2 + Thu Thuat 3
+            Cells(i, 35) = Left(Cells(i, 21), 50) 'Bo nguoi lam phu
+            Cells(i, 25) = Left(Cells(i, 22), 50)
         'Doi ten thu thuat sang 21 ky tu
             Cells(i, 11) = Left(Cells(i, 8), 21)
         'Format thoi gian lam
             Cells(i, 15).FormulaR1C1 = "=DATE(YEAR(RC[-2]),MONTH(RC[-2]),DAY(RC[-2]))"
-        'Time v‡o - time ra
+        'Time v√†o - time ra
             Cells(i, 17) = Cells(i, 14) - Cells(i, 13)
             Cells(i, 12).FormulaR1C1 = "=bo_dau_tieng_viet(RC[-1])"
             Cells(i, 24).FormulaR1C1 = "=bo_dau_tieng_viet(RC[11])"
@@ -610,6 +634,8 @@ While Cells(i, 5) <> ""
 Wend
 i = 0
 str = ""
+Sheets("Cacche1").Cells(6, 15) = m
+
 
 Call PasteValueH(strx, m)
     
@@ -630,29 +656,54 @@ Call CCHN_Error(m)
 Call ShortNameTT(strx, m, ww)
 
 'Loc trung gio2
-Application.Calculation = xlCalculationAutomatic 'C·i n‡y de tinh Automatic moi coppy/paste duoc
+Application.Calculation = xlCalculationAutomatic 'C√°i n√†y de tinh Automatic moi coppy/paste duoc
        Cells(7, 27).Value = _
-            "=COUNTIFS($B$7:$B$" & m - 1 & ",B7,$T$7:$T$" & m - 1 & ","">""&S7,$S$7:$S$" & m - 1 & ",""<""&T7,$X$7:$X$" & m - 1 & ",""<>""&X7)+COUNTIFS($B$7:$B$" & m - 1 & ",B7,$T$7:$T$" & m - 1 & ","">""&S7,$S$7:$S$" & m - 1 & ",""<""&T7)" 'Loc cot Phu second = 00
+            "=COUNTIFS($B$7:$B$" & m - 1 & ",B7,$C$7:$C$" & m - 1 & ",C7,$T$7:$T$" & m - 1 & ","">""&S7,$S$7:$S$" & m - 1 & ",""<""&T7,$X$7:$X$" & m - 1 & ",""<>""&X7)+COUNTIFS($B$7:$B$" & m - 1 & ",B7,$C$7:$C$" & m - 1 & ",C7,$T$7:$T$" & m - 1 & ","">""&S7,$S$7:$S$" & m - 1 & ",""<""&T7)" 'Loc cot Phu second = 00
        Range("AA7").AutoFill Destination:=Range("AA7:AA" & m - 1)
+       Cells(7, 26).Value = _
+            "=COUNTIFS($B$7:$B$" & m - 1 & ",B7,$C$7:$C$" & m - 1 & ",C7,$T$7:$T$" & m - 1 & ","">""&S7,$S$7:$S$" & m - 1 & ",""<""&T7,$Y$7:$Y$" & m - 1 & ",""<>""&Y7)+COUNTIFS($B$7:$B$" & m - 1 & ",B7,$C$7:$C$" & m - 1 & ",C7,$T$7:$T$" & m - 1 & ","">""&S7,$S$7:$S$" & m - 1 & ",""<""&T7)" 'Loc cot Phu second = 00
+       Range("Z7").AutoFill Destination:=Range("Z7:Z" & m - 1) 'Trung nguoi Phu
        Cells(7, 28).Value = _
-            "=COUNTIFS($X$7:$X$" & m - 1 & ",X7,$T$7:$T$" & m - 1 & ","">""&S7,$S$7:$S$" & m - 1 & ",""<""&T7,$B$7:$B$" & m - 1 & ",""<>""&B7)+COUNTIFS($X$7:$X$" & m - 1 & ",X7,$T$7:$T$" & m - 1 & ","">""&S7,$S$7:$S$" & m - 1 & ",""<""&T7)" 'Loc cot Phu second = 00
+            "=COUNTIFS($X$7:$X$" & m - 1 & ",X7,$T$7:$T$" & m - 1 & ","">""&S7,$S$7:$S$" & m - 1 & ",""<""&T7,$B$7:$B$" & m - 1 & ",""<>""&B7,$C$7:$C$" & m - 1 & ",""<>""&C7)+COUNTIFS($X$7:$X$" & m - 1 & ",X7,$T$7:$T$" & m - 1 & ","">""&S7,$S$7:$S$" & m - 1 & ",""<""&T7)" 'Loc cot Phu second = 00
        Range("AB7").AutoFill Destination:=Range("AB7:AB" & m - 1)
        'Sum TimeBH
        Cells(7, 21).Value = "=SUMIFS($J$7:$J$" & m - 1 & ",$X$7:$X$" & m - 1 & ",X7,$O$7:$O$" & m - 1 & ",O7)"
        Range("U7").AutoFill Destination:=Range("U7:U" & m - 1)
-Application.Calculation = xlCalculationManual 'Het lenh C·i n‡y de tinh Automatic moi coppy/paste duoc
+Application.Calculation = xlCalculationManual 'Het lenh C√°i n√†y de tinh Automatic moi coppy/paste duoc
     
-    Range("AA7:AB" & m - 1).Copy 'Ctrl+Shift+D thÏ bo lenh copy 2lenh
+    Range("AA7:AB" & m - 1).Copy 'Ctrl+Shift+D th√¨ bo lenh copy 2lenh
     Range("AA7").PasteSpecial Paste:=xlPasteValues, Operation:=xlNone, SkipBlanks:=False, Transpose:=False
+    Range("Z7:Z" & m - 1).Copy
+    Range("Z7").PasteSpecial Paste:=xlPasteValues, Operation:=xlNone, SkipBlanks:=False, Transpose:=False
     Range("U7:U" & m - 1).Copy
     Range("U7").PasteSpecial Paste:=xlPasteValues, Operation:=xlNone, SkipBlanks:=False, Transpose:=False
-'HÍt Loc trung gio2
+'H√™t Loc trung gio2
+
+'Demo1 NgThu
+        Cells(7, 42).Value = "=COUNTIFS($S$7:$S$" & m - 1 & ",S7,$B$7:$B$" & m - 1 & ",B7)"
+            Range("AP7").AutoFill Destination:=Range("AP7:AP" & m - 1)
+        Cells(7, 43).Value = "=COUNTIFS($T$7:$T$" & m - 1 & ",T7,$B$7:$B$" & m - 1 & ",B7)"
+            Range("AQ7").AutoFill Destination:=Range("AQ7:AQ" & m - 1)
+        Cells(5, 42) = "V√†o 1BN"
+        Cells(5, 43) = "Ra 1BN"
+        
+        Cells(7, 44).Value = "=COUNTIFS($S$7:$S$" & m - 1 & ",S7,$X$7:$X$" & m - 1 & ",X7)"
+            Range("AR7").AutoFill Destination:=Range("AR7:AR" & m - 1)
+        Cells(7, 45).Value = "=COUNTIFS($T$7:$T$" & m - 1 & ",T7,$X$7:$X$" & m - 1 & ",X7)"
+            Range("AS7").AutoFill Destination:=Range("AS7:AS" & m - 1)
+        Cells(5, 44) = "V√†o 1NV"
+        Cells(5, 45) = "Ra 1NV"
+        
+        Range("AP7:AS" & m - 1).Copy
+        Range("AP7").PasteSpecial Paste:=xlPasteValues, Operation:=xlNone, SkipBlanks:=False, Transpose:=False
+
+'Het Demo1 NgThu
 
 'Tich nham nguoi khong truc
 Call NoTruc(strx, m, ww)
 
 'Color
-Call CoLor(m)
+Call Color(m)
 
 'So Luong BN theo ngay
 Call BN_Date(strx, m, ww)
@@ -679,10 +730,10 @@ Call BN_Date(strx, m, ww)
     ActiveSheet.PivotTables("PivotTableH").AddDataField ActiveSheet.PivotTables( _
         "PivotTableH").PivotFields("TenDv"), "Count of TenDv", xlCount
     With ActiveSheet.PivotTables("PivotTableH").PivotFields("TenDv")
-        .Orientation = xlColumnField 'L‚n 2
+        .Orientation = xlColumnField 'L√¢n 2
         .Position = 1
     End With
-'HÍt PivotH TT
+'H√™t PivotH TT
     
 'PivotH TimeBH
     ActiveWorkbook.PivotCaches.Create(SourceType:=xlDatabase, SourceData:= _
@@ -708,8 +759,9 @@ Call BN_Date(strx, m, ww)
         .Function = xlSum
     End With
     Range("B33:B55").NumberFormat = "[h]:mm;@"
-'HÍt PivotH TimeBH
-Cells(1, 5) = "Chu y Ù: Blank"
+'H√™t PivotH TimeBH
+Cells(1, 5) = "Chu y √¥: Blank"
+Call NameH
     
 Sheets("DuLieu").Select
 Cells(1, 1).Select
@@ -719,8 +771,8 @@ Application.ScreenUpdating = True
 Application.Calculation = xlCalculationAutomatic
 End Sub
 
-Sub ALL_FixTT() 'Ctrl+Shift+C
-Attribute ALL_FixTT.VB_ProcData.VB_Invoke_Func = "C\n14"
+Sub FixTT_ALL() 'Ctrl+Shift+C
+Attribute FixTT_ALL.VB_ProcData.VB_Invoke_Func = "C\n14"
 Dim i As Variant
 Dim str As String
 Dim strx As String
@@ -824,7 +876,7 @@ For x = 1 To j
             Next
         
         End If
-        'HÍt Loc trung gio2
+        'H√™t Loc trung gio2
     End If
 Next
 a = ""
@@ -835,15 +887,14 @@ j = ""
 Application.Calculation = xlCalculationAutomatic
 
 'FixTT
-Cells(5, 35) = "00:05" 'Step
-Cells(5, 36) = "07:30" 'Gio mua dong mua he
-Cells(5, 37) = "13:00"
+
+Call GioMuaDongHe(strx, ww) 'Gio mua d√¥ng mua he
 
 For i = 7 To m
     If Cells(i, 35) > 2 Then
         Cells(i, 32) = "Fix"
         Cells(i, 14).FormulaR1C1 = "=RC[-1] + RC[-3]"
-        For j = 0 To 120   'L‡m den 19h00
+        For j = 0 To 120   'L√†m den 19h00
             If Cells(i, 35) > 2 Then
                 If j = 0 Then
                         Cells(i, 13) = Cells(i, 15) + Cells(5, 36)
@@ -858,7 +909,7 @@ For i = 7 To m
         Next
     End If
 Next
-'HÍt FixTT
+'H√™t FixTT
 
 'Sum TimeBH
 Cells(7, 21).Value = "=SUMIFS($K$7:$K$" & m - 1 & ",$Y$7:$Y$" & m - 1 & ",Y7,$O$7:$O$" & m - 1 & ",O7)"
@@ -913,7 +964,7 @@ b = 0
 x = 0
 For x = 1 To j
     b = a
-    a = a + Sheets("Cacche1").Cells(ww + 1 + x, 7)
+    a = a + Sheets("Cacche1").Cells(ww + x, 7)
     If a + 6 <= m - 1 Then
         If x = 1 Then
             For i = 7 To a + 6
@@ -947,7 +998,7 @@ For x = 1 To j
             Next
         
         End If
-        'HÍt Loc trung gio2
+        'H√™t Loc trung gio2
     End If
 Next
 a = ""
@@ -958,15 +1009,13 @@ j = ""
 Application.Calculation = xlCalculationAutomatic
 
 'FixTT
-Cells(4, 35) = "00:05" 'Step
-Cells(4, 36) = "07:30" 'Gio mua dong mua he
-Cells(4, 37) = "13:00"
+Call GioMuaDongHe(strx, ww) 'Gio mua d√¥ng mua he
 
 For i = 7 To m
     If Cells(i, 35) > 2 Then
         Cells(i, 32) = "Fix"
         Cells(i, 14).FormulaR1C1 = "=RC[-1] + RC[-4]"
-        For j = 0 To 120   'L‡m den 19h00
+        For j = 0 To 120   'L√†m den 19h00
             If Cells(i, 35) > 2 Then
                 If j = 0 Then
                         Cells(i, 13) = Cells(i, 15) + Cells(4, 36)
@@ -981,7 +1030,7 @@ For i = 7 To m
         Next
     End If
 Next
-'HÍt FixTT
+'H√™t FixTT
 
 'Sum TimeBH
 Cells(7, 21).Value = "=SUMIFS($J$7:$J$" & m - 1 & ",$X$7:$X$" & m - 1 & ",X7,$O$7:$O$" & m - 1 & ",O7)"
@@ -1008,7 +1057,7 @@ str = Sheets(i).Name
         Sheets("Cacche1").Select
             Range("K" & ww + 1).PasteSpecial Paste:=xlPasteValues, Operation:=xlNone, SkipBlanks:=False, Transpose:=False
         Sheets(strx).Select
-Application.Calculation = xlCalculationAutomatic 'C·i n‡y de tinh Automatic moi coppy/paste duoc
+Application.Calculation = xlCalculationAutomatic 'C√°i n√†y de tinh Automatic moi coppy/paste duoc
 
             Cells(7, 31).Value = "=VLOOKUP(X7,Cacche1!$H$" & ww + 1 & ":$I$" & ww + 40 & ",2,FALSE)"
                 Range("AE7").AutoFill Destination:=Range("AE7:AE" & m - 1)
@@ -1019,7 +1068,7 @@ Application.Calculation = xlCalculationAutomatic 'C·i n‡y de tinh Automatic moi 
             Cells(7, 35).Value = "=IF(AC7<>""No"",""Yes"",IF(AND(AC7=""No"",OR(R7=""T7"",R7=""CN"")),""NoT7CN"",AC7))" 'Cacche
                 Range("AI7").AutoFill Destination:=Range("AI7:AI" & m - 1)
             
-Application.Calculation = xlCalculationManual 'Het lenh C·i n‡y de tinh Automatic moi coppy/paste duoc
+Application.Calculation = xlCalculationManual 'Het lenh C√°i n√†y de tinh Automatic moi coppy/paste duoc
 
         Range("AI7:AI" & m - 1).Copy
         Range("AC7").PasteSpecial Paste:=xlPasteValues, Operation:=xlNone, SkipBlanks:=False, Transpose:=False
@@ -1030,12 +1079,12 @@ Application.Calculation = xlCalculationManual 'Het lenh C·i n‡y de tinh Automati
      End If
  Next
 str = ""
-'HÈt Tich nham nguoi khong truc
+'H√©t Tich nham nguoi khong truc
 End Sub
 
-Sub CoLor(m As Variant)
+Sub Color(m As Variant)
     
-    With Range("AA6:AB" & m - 1).Interior
+    With Range("Z6:AB" & m - 1).Interior
         .Pattern = xlSolid
         .PatternColorIndex = xlAutomatic
         .ThemeColor = xlThemeColorAccent5
@@ -1062,7 +1111,7 @@ Sub CoLor(m As Variant)
     With Range("I6:I" & m - 1).Interior
         .Pattern = xlSolid
         .PatternColorIndex = xlAutomatic
-        .CoLor = 49407
+        .Color = 49407
         .TintAndShade = 0
         .PatternTintAndShade = 0
     End With
@@ -1086,11 +1135,19 @@ Sub CoLor(m As Variant)
     With Range("U6:U" & m - 1).Interior
         .Pattern = xlSolid
         .PatternColorIndex = xlAutomatic
-        .CoLor = 15773696
+        .Color = 15773696
         .TintAndShade = 0
         .PatternTintAndShade = 0
     End With
-'HÍt Color
+    
+    With Range("AF6:AF" & m - 1).Interior
+        .Pattern = xlSolid
+        .PatternColorIndex = xlAutomatic
+        .ThemeColor = xlThemeColorAccent4
+        .TintAndShade = 0.399975585192419
+        .PatternTintAndShade = 0
+    End With
+'H√™t Color
 End Sub
 
 Sub Cacche1()
@@ -1103,9 +1160,9 @@ Sheets.Add.Name = "Cacche1"
 Sheets("Cacche1").Move Before:=Sheets(3)
 Sheets("Cacche1").Select
 Cells(1, 2) = "Cuu (ngai cuu, tui ch"
-Cells(2, 2) = "Dien cham"
+Cells(2, 2) = "Dien cham [kim ngan]"
 Cells(3, 2) = "Ngam thuoc YHCT bo ph"
-Cells(4, 2) = "Sac thuoc thang"
+Cells(4, 2) = "Sac thuoc thang (Da b"
 Cells(5, 2) = "Thuy cham (Chua bao g"
 Cells(6, 2) = "Xoa bop bam huyet ban"
 Cells(7, 2) = "Dieu tri bang cac don"
@@ -1120,9 +1177,27 @@ Cells(14, 2) = "Tap len, xuong cau th"
 Cells(15, 2) = "Dieu tri bang tia hon"
 Cells(16, 2) = "Tap ngoi thang bang t"
 Cells(17, 2) = "Ky thuat xoa bop vung"
+Cells(18, 2) = "Ky thuat tap dung va"
+Cells(19, 2) = "Ky thuat tap tay va b"
+Cells(20, 2) = "Tap dung thang bang t"
+Cells(21, 2) = "Tap di voi khung tap"
+Cells(22, 2) = "Dich vu cay chi theo"
+Cells(23, 2) = "Ky thuat xoa bop toan"
+Cells(24, 2) = "Tap tri giac va nhan"
+Cells(25, 2) = "Tap voi thang tuong"
+Cells(26, 2) = "Ky thuat keo nan tri"
+Cells(27, 2) = "Dieu tri tac tia sua"
+Cells(28, 2) = "Van dong tri lieu ho"
+Cells(29, 2) = "Thut giu"
+Cells(30, 2) = "Tap tao thuan than ki"
+Cells(31, 2) = "Tap cho nguoi that ng"
+Cells(32, 2) = "Cay chi (hoi chung co"
+
+
+
 Cells(1, 3) = "YHCT"
 Cells(2, 3) = "YHCT"
-Cells(3, 3) = "_"
+Cells(3, 3) = "YHCT" '"NgamChan"
 Cells(4, 3) = "YHCT"
 Cells(5, 3) = "YHCT"
 Cells(6, 3) = "YHCT"
@@ -1134,9 +1209,26 @@ Cells(11, 3) = "PHCN"
 Cells(12, 3) = "PHCN"
 Cells(13, 3) = "_"
 Cells(14, 3) = "PHCN"
-Cells(15, 3) = "PHCN"
-Cells(16, 3) = "PHCN"
-Cells(17, 3) = "YHCT"
+Cells(15, 3) = "PHCN" '"Dieu tri bang tia hon"
+Cells(16, 3) = "PHCN" '"Tap ngoi thang bang t"
+Cells(17, 3) = "YHCT" '"Ky thuat xoa bop vung"
+Cells(18, 3) = "PHCN" '"Ky thuat tap dung va"
+Cells(19, 3) = "PHCN" '"Ky thuat tap tay va b"
+Cells(20, 3) = "PHCN" '"Tap dung thang bang t"
+Cells(21, 3) = "PHCN" '"Tap di voi khung tap"
+Cells(22, 3) = "YHCT" '"Dich vu cay chi theo"
+Cells(23, 3) = "YHCT" '"Ky thuat xoa bop toan"
+Cells(24, 3) = "PHCN" '"Tap tri giac va nhan"
+Cells(25, 3) = "PHCN" '"Tap voi thang tuong"
+Cells(26, 3) = "PHCN" '"Ky thuat keo nan tri"
+Cells(27, 3) = "PHCN"
+Cells(28, 3) = "PHCN"
+Cells(29, 3) = "_"
+Cells(30, 3) = "PHCN"
+Cells(31, 3) = "PHCN"
+Cells(32, 3) = "YHCT"
+
+
 
 Cells(1, 4) = "CuuNgai"
 Cells(2, 4) = "DienCham"
@@ -1147,71 +1239,121 @@ Cells(6, 4) = "XoaBop"
 Cells(7, 4) = "DienXung"
 Cells(8, 4) = "KeoGian"
 Cells(9, 4) = "Parafin"
-Cells(10, 4) = "Sieu¬m"
+Cells(10, 4) = "Sieu√Çm"
 Cells(11, 4) = "TapVD"
 Cells(12, 4) = "TapVD"
-Cells(13, 4) = "KoKim"
+Cells(13, 4) = "zKoKim"
 Cells(14, 4) = "TapPHCN"
-Cells(15, 4) = "Hongoai"
-Cells(16, 4) = "TapVD"
-Cells(17, 4) = "XoaBop"
+Cells(15, 4) = "Hongoai" '"Dieu tri bang tia hon"
+Cells(16, 4) = "TapDQ" '"Tap ngoi thang bang t"
+Cells(17, 4) = "XoaBop" '"Ky thuat xoa bop vung"
+Cells(18, 4) = "TapDQ" '"Ky thuat tap dung va"
+Cells(19, 4) = "TapDQ" '"Ky thuat tap tay va b"
+Cells(20, 4) = "TapDQ" '"Tap dung thang bang t"
+Cells(21, 4) = "TapDQ" '"Tap di voi khung tap"
+Cells(22, 4) = "zCayChi" '"Dich vu cay chi theo"
+Cells(23, 4) = "XoaBop" '"Ky thuat xoa bop toan"
+Cells(24, 4) = "TapDQ" '"Tap tri giac va nhan"
+Cells(25, 4) = "TapDQ" '"Tap voi thang tuong"
+Cells(26, 4) = "KeoNan"
+Cells(27, 4) = "SoNgan"
+Cells(28, 4) = "TapHHap"
+Cells(29, 4) = "ThutThao"
+Cells(30, 4) = "TapPHCN"
+Cells(31, 4) = "TapPHCN"
+Cells(32, 4) = "C√¢yChi"
+
 
 Cells(1, 7) = "00:15"  '"Cuu ngai"
 Cells(2, 7) = "00:20"   '"Dien cham"
-Cells(3, 7) = "00:0"   '"Ngam chan"
+Cells(3, 7) = "00:15"   '"Ngam chan"
 Cells(4, 7) = "00:5"   '"Sac thuoc"
-Cells(5, 7) = "00:5"   '"Thuy cham"
-Cells(6, 7) = "00:15"  '"Xoa bop"
+Cells(5, 7) = "00:15"   '"Thuy cham"
+Cells(6, 7) = "00:20"  '"Xoa bop"
 Cells(7, 7) = "00:15"  '"Dien xung"
-Cells(8, 7) = "00:5"   '"Keo gian"
+Cells(8, 7) = "00:5"   '"M√°y k√©o gian"
 Cells(9, 7) = "00:15"   '"Parafin"
 Cells(10, 7) = "00:15" '"Sieu am"
 Cells(11, 7) = "00:20" '"Tap VD"
 Cells(12, 7) = "00:20" '"Tap VD"
 Cells(13, 7) = "00:0"  '"Ko Kim"
-Cells(14, 7) = "00:10"  '"Tap PHCN"
-Cells(15, 7) = "00:5"  'Hongoai
+Cells(14, 7) = "00:20"  '"Tap PHCN"
+Cells(15, 7) = "00:15"  'Hongoai
 Cells(16, 7) = "00:20" 'Tap VD
-Cells(17, 7) = "00:15"  '"Xoa bop"
+Cells(17, 7) = "00:20"  '"Xoa bop"
+Cells(18, 7) = "00:20"  '"TapDQ"
+Cells(19, 7) = "00:20"  '"TapDQ"
+Cells(20, 7) = "00:20"  '"TapDQ"
+Cells(21, 7) = "00:20"  '"TapDQ"
+Cells(22, 7) = "00:0"  '"CayChi"
+Cells(23, 7) = "00:15"  '"XoaBop"
+Cells(24, 7) = "00:15"  '"TapDQ"
+Cells(25, 7) = "00:15"  '"TapDQ"
+Cells(26, 7) = "00:15"
+Cells(27, 7) = "00:15"
+Cells(28, 7) = "00:15"
+Cells(29, 7) = "00:15"
+Cells(30, 7) = "00:20"  '"TapDQ"
+Cells(31, 7) = "00:20"  '"TapDQ"
+Cells(32, 7) = "00:20"  '"C√¢yChi"
 
-Cells(1, 8) = "35500" ' Cuu ngai"
-Cells(2, 8) = "67300" '"Dien cham"
-Cells(3, 8) = "1" '"Ngam chan"
-Cells(4, 8) = "12500" '"Sac thuoc"
-Cells(5, 8) = "66100" '"Thuy cham"
-Cells(6, 8) = "65500" '"Xoa bop"
-Cells(7, 8) = "41400" '"Dien xung"
-Cells(8, 8) = "45800" '"Keo gian"
-Cells(9, 8) = "42400" '"Parafin"
-Cells(10, 8) = "45600" '"Sieu am"
-Cells(11, 8) = "46900" '"Tap VD"
-Cells(12, 8) = "45600" '"Tap VD"
+
+
+Cells(1, 8) = "37000" ' Cuu ngai"
+Cells(2, 8) = "78300" '"Dien cham"
+Cells(3, 8) = "54800" '"Ngam chan"
+Cells(4, 8) = "14000" '"Sac thuoc"
+Cells(5, 8) = "77100" '"Thuy cham"
+Cells(6, 8) = "76000" '"Xoa bop"
+Cells(7, 8) = "44900" '"Dien xung"
+Cells(8, 8) = "50800" '"Keo gian"
+Cells(9, 8) = "46000" '"Parafin"
+Cells(10, 8) = "48700" '"Sieu am"
+Cells(11, 8) = "49300" '"Tap VD"
+Cells(12, 8) = "49300" '"Tap VD"
 Cells(13, 8) = "1" '"Ko Kim"
-Cells(14, 8) = "29000" '"TapPHCN"
-Cells(15, 8) = "35200" '"Hongoai"
-Cells(16, 8) = "46900" '"Tap VD"
-Cells(17, 8) = "41800" '"Xoa bop"
+Cells(14, 8) = "33400" '"TapPHCN"
+Cells(15, 8) = "40900" '"Hongoai"
+Cells(16, 8) = "59300" '"Tap VD"
+Cells(17, 8) = "51300" '"Xoa bop"
+Cells(18, 8) = "59300" '"TapDQ"
+Cells(19, 8) = "51800" '"TapDQ"
+Cells(20, 8) = "59300" '"TapDQ"
+Cells(21, 8) = "33400" '"TapDQ"
+Cells(22, 8) = "1" '"CayChi"
+Cells(23, 8) = "64900" '"XoaBop"
+Cells(24, 8) = "51400" '"TapDQ"
+Cells(25, 8) = "33400" '"TapDQ"
+Cells(26, 8) = "54800"
+Cells(27, 8) = "41100"
+Cells(28, 8) = "32900" '
+Cells(29, 8) = "92400"
+Cells(30, 8) = "59300"
+Cells(31, 8) = "124000"
+Cells(32, 8) = "1564000"  ' C√¢yChi
+
 
 'Cells(1, 5) = "Tran Thi Hong Thinh"
 'Cells(2, 5) = "Tran Thi Lan"
-'Cells(3, 5) = "Nguyen Thi Thu Thao"
+Cells(3, 5) = "Vu Thi Thu Thanh"
 'Cells(4, 5) = "Le Thi Hong Lien"
-'Cells(5, 5) = "Luong Thi Minh Nguyet"
-Cells(6, 5) = "Hoang Thi Nhu Quynh"
+Cells(5, 5) = "Le Thi Nhu Hoan"
+Cells(6, 5) = "Bs. Doan Thi Kim Oanh"
 
 Cells(1, 6) = "PHCN" '"Tran Thi Hong Thinh"
 Cells(2, 6) = "PHCN" '"Tran Thi Lan"
-Cells(3, 6) = "PHCN" '"Nguyen Thi Thu Thao"
+Cells(3, 6) = "PHCN" '"Vu Thi Thu Thanh"
 Cells(4, 6) = "YHCT" '"Le Thi Hong Lien"
 Cells(5, 6) = "YHCT" '"Luong Thi Minh Nguyet"
 Cells(6, 6) = "YHCT" '"Hoang Thi Nhu Quynh"
 
 'Nhac nho
-Cells(2, 13) = "Pivot: Thua Nguoi so voi bang cham cong, Tich nham nguoi khoa kh·c, SumThuThuat/People, Blank"
+Cells(2, 13) = "Pivot: Thua Nguoi so voi bang cham cong, Tich nham nguoi khoa kh√°c, SumThuThuat/People, Blank"
 Cells(3, 13) = "DuLieu: YHCT-PHCN, Time Vao-Ra, T7/CN, Trung Gio,"
-Cells(4, 13) = "BS kh·m 8min/1BN (Thuong la cuoi tuan co it ngTruc)"
+Cells(4, 13) = "BS kh√°m 8min/1BN (Thuong la cuoi tuan co it ngTruc)"
 Cells(5, 13) = "Tham so dich chuyen BN/Date (ww):"
-Cells(5, 17) = 20
+Cells(5, 17) = 35
+Cells(6, 13) = "Rows end (m=):"
 
 Call Cacche11
 
@@ -1219,7 +1361,8 @@ Call Cacche11
 'Application.ScreenUpdating = True
 'Application.Calculation = xlCalculationAutomatic
 End Sub
-Sub Cacche11()
+
+Sub Cacche11() '√êi Sau Cacche1
 Dim ww As Integer
 
 Sheets("Cacche1").Select
@@ -1242,7 +1385,7 @@ Cells(ww, 12) = "Nguoi Truc"
 Cells(ww, 14) = "Dr/Date"
 Cells(ww, 15) = "TimeKham"
 
-Cells(ww + 1, 8) = "BS CKI. Pham Van Anh"
+Cells(ww + 1, 8) = "BSCKI. Pham Van Anh"
 Cells(ww + 2, 8) = "BS. Phung Manh Dat"
 Cells(ww + 3, 8) = "BS. Nguyen Thi Huyen"
 Cells(ww + 4, 8) = "BS. Vu Thi Ngoc"
@@ -1261,6 +1404,9 @@ Cells(ww + 16, 8) = "Nguyen Thi Thu Thao"
 Cells(ww + 17, 8) = "Tran Thi Kim Thuy"
 Cells(ww + 18, 8) = "Tran Thi Hong Thinh"
 Cells(ww + 19, 8) = "Luong Thi Minh Nguyet"
+Cells(ww + 20, 8) = "Vu Thi Thu Thanh"
+Cells(ww + 21, 8) = "BS. Le Thi Thu"
+Cells(ww + 22, 8) = "BS. Doan Thi Kim Oanh"
 
 Cells(ww + 1, 9) = "Pham Van Anh"
 Cells(ww + 2, 9) = "Phung Manh Dat"
@@ -1281,6 +1427,9 @@ Cells(ww + 16, 9) = "Nguyen Thi Thu Thao"
 Cells(ww + 17, 9) = "Tran Thi Kim Thuy"
 Cells(ww + 18, 9) = "Tran Thi Hong Thinh"
 Cells(ww + 19, 9) = "Luong Thi Minh Nguyet"
+Cells(ww + 20, 9) = "Vu Thi Thu Thanh"
+Cells(ww + 21, 9) = "Le Thi Thu"
+Cells(ww + 22, 9) = "Doan Thi Kim Oanh"
 
 End Sub
 
@@ -1347,45 +1496,45 @@ Cells(1, 1).Select
 End Sub
 
 Sub ShortNameTT(strx As String, m As Variant, ww As Integer) 'Doi ten thu thuat cho pivot de nhin
-Dim i As Integer
+        Dim i As Integer
 
-If strx = "So Phau thuat" Then
-        For i = 7 To m - 1
-           Cells(i, 35).FormulaR1C1 = "=IFERROR(VLOOKUP(RC[-26], Cacche1!R1C2:R" & ww - 2 & "C4,3,0),""NoList"")"
-        Next
-End If
-If strx = "DuLieu" Then
-        For i = 7 To m - 1
-           Cells(i, 35).FormulaR1C1 = "=IFERROR(VLOOKUP(RC[-23], Cacche1!R1C2:R" & ww - 2 & "C4,3,0),""NoList"")"
-        Next
-End If
+        If strx = "So Phau thuat" Then
+                        For i = 7 To m - 1
+                           Cells(i, 35).FormulaR1C1 = "=IFERROR(VLOOKUP(RC[-26], Cacche1!R1C2:R" & ww - 2 & "C4,3,0),""NoList"")"
+                        Next
+        End If
+        If strx = "DuLieu" Then
+                        For i = 7 To m - 1
+                           Cells(i, 35).FormulaR1C1 = "=IFERROR(VLOOKUP(RC[-23], Cacche1!R1C2:R" & ww - 2 & "C4,3,0),""NoList"")"
+                        Next
+        End If
 
-'Thu thuat khong co ten trong list cacche1
-Application.Calculation = xlCalculationAutomatic
-If strx = "So Phau thuat" Then
-    For i = 7 To m - 1
-        If Cells(i, 35) = "NoList" Then
-              Cells(i, 35).FormulaR1C1 = "=bo_dau_tieng_viet(RC[-23])"
+        'Thu thuat khong co ten trong list cacche1
+        Application.Calculation = xlCalculationAutomatic
+        If strx = "So Phau thuat" Then
+                For i = 7 To m - 1
+                        If Cells(i, 35) = "NoList" Then
+                                  Cells(i, 35).FormulaR1C1 = "=bo_dau_tieng_viet(RC[-23])"
+                        End If
+                Next
+                Range("AI7:AI" & m).Copy 'Cacche colunm
+                Range("I7").PasteSpecial Paste:=xlPasteValues, Operation:=xlNone, SkipBlanks:=False, Transpose:=False
         End If
-    Next
-    Range("AI7:AI" & m).Copy 'Cacche colunm
-    Range("I7").PasteSpecial Paste:=xlPasteValues, Operation:=xlNone, SkipBlanks:=False, Transpose:=False
-End If
-If strx = "DuLieu" Then
-    For i = 7 To m - 1
-        If Cells(i, 35) = "NoList" Then 'Thu thuat khong co ten trong list cacche1
-              Cells(i, 35).FormulaR1C1 = "=bo_dau_tieng_viet(RC[-23])"
+        If strx = "DuLieu" Then
+                For i = 7 To m - 1
+                        If Cells(i, 35) = "NoList" Then 'Thu thuat khong co ten trong list cacche1
+                                  Cells(i, 35).FormulaR1C1 = "=bo_dau_tieng_viet(RC[-23])"
+                        End If
+                Next
+                Range("AI7:AI" & m).Copy 'Cacche colunm
+                Range("H7").PasteSpecial Paste:=xlPasteValues, Operation:=xlNone, SkipBlanks:=False, Transpose:=False
         End If
-    Next
-    Range("AI7:AI" & m).Copy 'Cacche colunm
-    Range("H7").PasteSpecial Paste:=xlPasteValues, Operation:=xlNone, SkipBlanks:=False, Transpose:=False
-End If
-Application.Calculation = xlCalculationManual
-'HÈt Thu thuat khong co ten trong list cacche1
-  
-    Range("AI7:AI" & m + 1).Value = "" 'Xoa Data
-    Range("L7:L" & m + 1).Value = ""
-'Het Doi ten thu thuat cho pivot de nhin
+        Application.Calculation = xlCalculationManual
+        'H√©t Thu thuat khong co ten trong list cacche1
+          
+                Range("AI7:AI" & m + 1).Value = "" 'Xoa Data
+                Range("L7:L" & m + 1).Value = ""
+        'Het Doi ten thu thuat cho pivot de nhin
 End Sub
 
 Sub XuLyBangTruc()  'Ctrl+Shift+Y
@@ -1435,6 +1584,139 @@ For i = 7 To m
         End If
      End If
 Next
+End Sub
+
+Sub GioMuaDongHe(strx As String, ww As Integer)
+Dim date1 As Date
+Dim date2 As Date
+
+date1 = "15/04"
+date2 = "15/10"
+
+If (date1 <= Sheets("Cacche1").Cells(ww + 1, 5).Value) And (Sheets("Cacche1").Cells(ww + 1, 5).Value < date2) Then
+        If strx = "So Phau thuat" Then
+            Cells(5, 35) = "00:05" 'Step
+            Cells(5, 36) = "07:00" 'Gio mua he
+            Cells(5, 37) = "13:30"
+            Cells(5, 38) = "mua he"
+        End If
+        If strx = "DuLieu" Then
+            Cells(4, 35) = "00:05" 'Step
+            Cells(4, 36) = "07:00" 'Gio mua he
+            Cells(4, 37) = "13:30"
+            Cells(4, 38) = "mua he"
+        End If
+    Else
+        If strx = "So Phau thuat" Then
+            Cells(5, 35) = "00:05" 'Step
+            Cells(5, 36) = "07:30" 'Gio mua d√¥ng
+            Cells(5, 37) = "13:00"
+            Cells(5, 38) = "mua d√¥ng"
+        End If
+        If strx = "DuLieu" Then
+            Cells(4, 35) = "00:05" 'Step
+            Cells(4, 36) = "07:30" 'Gio mua d√¥ng
+            Cells(4, 37) = "13:00"
+            Cells(4, 38) = "mua d√¥ng"
+        End If
+End If
+
+End Sub
+
+Sub CopyTime()  'Khong dung nua
+Attribute CopyTime.VB_ProcData.VB_Invoke_Func = " \n14"
+Dim i As Variant
+Dim str As String
+Dim m As Integer
+
+Application.DisplayAlerts = False
+Application.ScreenUpdating = False
+'Application.Calculation = xlCalculationManual
+
+'m = Sheets("So Phau thuat (2)").UsedRange.Rows(Sheets("So Phau thuat (2)").UsedRange.Rows.Count).Row
+m = Sheets("Cacche1").Cells(6, 15)
+
+For i = 1 To Sheets.Count
+    str = Sheets(i).Name
+        If str = "So Phau thuat" Then
+           Sheets("So Phau thuat (2)").Cells(7, 10).Formula = "=VLOOKUP('So Phau thuat (2)'!A7,'So Phau thuat'!$A$7:$N$" & m & ",13,FALSE)"
+           Range("J7").AutoFill Destination:=Range("J7:J" & m)
+           Sheets("So Phau thuat (2)").Cells(7, 11).Formula = "=VLOOKUP('So Phau thuat (2)'!A7,'So Phau thuat'!$A$7:$N$" & m & ",14,FALSE)"
+           Range("K7").AutoFill Destination:=Range("K7:K" & m)
+           
+           Sheets("So Phau thuat (2)").Range("J6:K" & m).Copy
+           Sheets("So Phau thuat (2)").Range("J6").PasteSpecial Paste:=xlPasteValues, Operation:=xlNone, SkipBlanks:=False, Transpose:=False
+           'Sheets("So Phau thuat (2)").Cells(1, 1).Select
+        End If
+           
+        If str = "DuLieu" Then
+           Sheets("DuLieu (2)").Cells(9, 14).Formula = "=VLOOKUP('DuLieu (2)'!B9,'DuLieu'!$A$7:$N$" & m & ",13,FALSE)"
+           Range("N9").AutoFill Destination:=Range("N9:N" & m)
+           Sheets("DuLieu (2)").Cells(9, 15).Formula = "=VLOOKUP('DuLieu (2)'!B9,'DuLieu'!$A$7:$N$" & m & ",14,FALSE)"
+           Range("O9").AutoFill Destination:=Range("O9:O" & m)
+           
+           Sheets("DuLieu (2)").Range("N9:O" & m).Copy
+           Sheets("DuLieu (2)").Range("N9").PasteSpecial Paste:=xlPasteValues, Operation:=xlNone, SkipBlanks:=False, Transpose:=False
+           'Sheets("DuLieu (2)").Cells(1, 1).Select
+        End If
+Next
+str = ""
+
+Application.DisplayAlerts = True
+Application.ScreenUpdating = True
+'Application.Calculation = xlCalculationAutomatic
+End Sub
+
+Sub CopyTime2() 'Ctrl+Shift+B
+Attribute CopyTime2.VB_ProcData.VB_Invoke_Func = "B\n14"
+Dim i As Variant
+Dim j As Variant
+Dim str As String
+Dim m As Integer
+Dim a As Integer
+Dim b As Integer
+
+Application.DisplayAlerts = False
+Application.ScreenUpdating = False
+'Application.Calculation = xlCalculationManual
+
+'m = Sheets("So Phau thuat").UsedRange.Rows(Sheets("So Phau thuat").UsedRange.Rows.Count).Row
+m = Sheets("Cacche1").Cells(6, 15)
+
+For i = 1 To Sheets.Count
+    str = Sheets(i).Name
+        If str = "So Phau thuat" Then
+            a = 1
+        End If
+        If str = "DuLieu" Then
+           a = 2
+        End If
+Next
+str = ""
+If a = 1 Then
+    For i = 7 To m
+        If Sheets("So Phau thuat").Cells(i, 32) = "Fix" Then
+            b = Sheets("So Phau thuat").Cells(i, 1)
+                For j = b - 100 To b + 100
+                    If Sheets("So Phau thuat (2)").Cells(j, 1) = b Then
+                        Sheets("So Phau thuat (2)").Cells(j, 10) = Sheets("So Phau thuat").Cells(i, 13)
+                        Sheets("So Phau thuat (2)").Cells(j, 11) = Sheets("So Phau thuat").Cells(i, 14)
+                    End If
+                Next
+        End If
+    Next
+End If
+
+Application.DisplayAlerts = True
+Application.ScreenUpdating = True
+'Application.Calculation = xlCalculationAutomatic
+
+End Sub
+
+Sub NameH()
+    ActiveWorkbook.Names.Add _
+        Name:="ww", _
+        RefersToR1C1:="=Cacche1!R5C17"
 End Sub
 
 Function bo_dau_tieng_viet(Text As String) As String
@@ -1626,88 +1908,17 @@ Function bo_dau_tieng_viet(Text As String) As String
   bo_dau_tieng_viet = NormalizedText
 End Function
 
-Sub GioMuaDongHe()
-'SoPhauThuat
-Cells(5, 35) = "00:05" 'Step
-Cells(5, 36) = "07:30" 'Gio mua dong mua he
-Cells(5, 37) = "13:00"
-
-'DuLieu
-Cells(4, 35) = "00:05" 'Step
-Cells(4, 36) = "07:30" 'Gio mua dong mua he
-Cells(4, 37) = "13:00"
-
-End Sub
-Sub CopyTime()  'Ctrl+Shift+B
-Attribute CopyTime.VB_ProcData.VB_Invoke_Func = "B\n14"
-Dim i As Variant
-Dim str As String
+Sub Test()
 Dim m As Integer
-
-Application.DisplayAlerts = False
-Application.ScreenUpdating = False
-'Application.Calculation = xlCalculationManual
-
-m = Sheets("So Phau thuat (2)").UsedRange.Rows(Sheets("So Phau thuat (2)").UsedRange.Rows.Count).Row
-
-For i = 1 To Sheets.Count
-    str = Sheets(i).Name
-        If str = "So Phau thuat" Then
-           Sheets("So Phau thuat (2)").Cells(7, 10).Formula = "=VLOOKUP('So Phau thuat (2)'!A7,'So Phau thuat'!$A$7:$N$" & m & ",13,TRUE)"
-           Range("J7").AutoFill Destination:=Range("J7:J" & m)
-           Sheets("So Phau thuat (2)").Cells(7, 11).Formula = "=VLOOKUP('So Phau thuat (2)'!A7,'So Phau thuat'!$A$7:$N$" & m & ",14,TRUE)"
-           Range("K7").AutoFill Destination:=Range("K7:K" & m)
-           
-           Sheets("So Phau thuat (2)").Range("J6:K" & m).Copy
-           Sheets("So Phau thuat (2)").Range("J6").PasteSpecial Paste:=xlPasteValues, Operation:=xlNone, SkipBlanks:=False, Transpose:=False
-           'Sheets("So Phau thuat (2)").Cells(1, 1).Select
-        End If
-           
-        If str = "DuLieu" Then
-            strx = str
-           
-        End If
-Next
-str = ""
-
-Application.DisplayAlerts = True
-Application.ScreenUpdating = True
-'Application.Calculation = xlCalculationAutomatic
-End Sub
-
-Sub CopyTime2() 'Chua lam xong
-Dim i As Variant
-Dim str As String
-Dim strx As String
-Dim m As Integer
+Dim i As Integer
+Dim j As Integer
 Dim a As Integer
+Dim str As String
 
-Application.DisplayAlerts = False
-Application.ScreenUpdating = False
-'Application.Calculation = xlCalculationManual
+'m = Sheets("So Phau thuat").UsedRange.Rows(Sheets("So Phau thuat").UsedRange.Rows.Count).Row
+'Ok dem row trong sheets
 
-m = Sheets("So Phau thuat").UsedRange.Rows(Sheets("So Phau thuat").UsedRange.Rows.Count).Row
-
-For i = 1 To Sheets.Count
-    str = Sheets(i).Name
-        If str = "So Phau thuat" Then
-            a = 1
-        End If
-        If str = "DuLieu" Then
-           a = 2
-        End If
-Next
-str = ""
-If a = 1 Then
-    For i = 7 To m
-        If Sheets("So Phau thuat").Cells(i, 32) = "Fix" Then
-        
-        End If
-    Next
-End If
-Application.DisplayAlerts = True
-Application.ScreenUpdating = True
-'Application.Calculation = xlCalculationAutomatic
+MsgBox (m)
 End Sub
 
 Sub Changelog()
@@ -1717,4 +1928,7 @@ Sub Changelog()
 'Sua loi khi tich thu thuat khac thu thuat trong list
 '25
 'Them tham so m khi them thu thuat moi
+'Ver:54
+'Ver:64 them loc trung gio nguoi phu, doi mau cot Z-AB
+'Ver:65 Them CacChe C√¢yChi
 End Sub
