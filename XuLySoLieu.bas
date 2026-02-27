@@ -1,6 +1,4 @@
-Attribute VB_Name = "ThuThuat0YHCT0BSHoang"
 Sub XuLySoLieu_ALL() 'Ctrl+Shift+D
-Attribute XuLySoLieu_ALL.VB_ProcData.VB_Invoke_Func = "D\n14"
 Dim i As Variant
 Dim str As String
 Dim strx As String
@@ -9,7 +7,7 @@ Application.DisplayAlerts = False
 Application.ScreenUpdating = False
 Application.Calculation = xlCalculationManual
 
-For i = 1 To Sheets.Count
+For i = 1 To Sheets.count
     str = Sheets(i).Name
         If str = "So Phau thuat" Then
             strx = str
@@ -29,7 +27,6 @@ Application.Calculation = xlCalculationAutomatic
 End Sub
 
 Sub XuLySoLieu_680(strx As String)
-Attribute XuLySoLieu_680.VB_ProcData.VB_Invoke_Func = " \n14"
 Dim i As Variant
 Dim j As Variant
 Dim m As Variant
@@ -42,7 +39,7 @@ Application.ScreenUpdating = False
 Application.Calculation = xlCalculationManual
 
 'On Error Resume Next
-For i = 1 To Sheets.Count
+For i = 1 To Sheets.count
     str = Sheets(i).Name
         If str = "Cacche1" Then
            Str2 = "H"
@@ -69,6 +66,8 @@ Sheets("So Phau thuat").Select
 'Columns("AU:AU").Paste 'Xóa Bênh Chính Bênh Phu
 'Columns("H:I").Delete Shift:=xlToLeft
 
+Columns(9).Delete 'Xóa cot 9 +10 trong Ver066
+Columns(9).Delete
 
 Columns(14).Insert Shift:=xlToRight
 Columns(14).Insert Shift:=xlToRight
@@ -422,7 +421,7 @@ Application.ScreenUpdating = False
 Application.Calculation = xlCalculationManual
 
 'On Error Resume Next
-For i = 1 To Sheets.Count
+For i = 1 To Sheets.count
     str = Sheets(i).Name
         If str = "Cacche1" Then
            Str2 = "H"
@@ -772,7 +771,6 @@ Application.Calculation = xlCalculationAutomatic
 End Sub
 
 Sub FixTT_ALL() 'Ctrl+Shift+C
-Attribute FixTT_ALL.VB_ProcData.VB_Invoke_Func = "C\n14"
 Dim i As Variant
 Dim str As String
 Dim strx As String
@@ -781,7 +779,7 @@ Application.DisplayAlerts = False
 Application.ScreenUpdating = False
 Application.Calculation = xlCalculationManual
 
-For i = 1 To Sheets.Count
+For i = 1 To Sheets.count
     str = Sheets(i).Name
         If str = "So Phau thuat" Then
             strx = str
@@ -1046,7 +1044,7 @@ Sub NoTruc(strx As String, m As Variant, ww As Integer) 'Tich nham nguoi khong t
 Dim str As String
 Dim i As Integer
 
-For i = 1 To Sheets.Count
+For i = 1 To Sheets.count
 str = Sheets(i).Name
     If str = "Truc" Then
         Sheets("Truc").Select
@@ -1538,7 +1536,6 @@ Sub ShortNameTT(strx As String, m As Variant, ww As Integer) 'Doi ten thu thuat 
 End Sub
 
 Sub XuLyBangTruc()  'Ctrl+Shift+Y
-Attribute XuLyBangTruc.VB_ProcData.VB_Invoke_Func = "Y\n14"
 Dim i As Integer
 Dim j As Variant
 Dim x As Variant
@@ -1624,7 +1621,6 @@ End If
 End Sub
 
 Sub CopyTime()  'Khong dung nua
-Attribute CopyTime.VB_ProcData.VB_Invoke_Func = " \n14"
 Dim i As Variant
 Dim str As String
 Dim m As Integer
@@ -1636,7 +1632,7 @@ Application.ScreenUpdating = False
 'm = Sheets("So Phau thuat (2)").UsedRange.Rows(Sheets("So Phau thuat (2)").UsedRange.Rows.Count).Row
 m = Sheets("Cacche1").Cells(6, 15)
 
-For i = 1 To Sheets.Count
+For i = 1 To Sheets.count
     str = Sheets(i).Name
         If str = "So Phau thuat" Then
            Sheets("So Phau thuat (2)").Cells(7, 10).Formula = "=VLOOKUP('So Phau thuat (2)'!A7,'So Phau thuat'!$A$7:$N$" & m & ",13,FALSE)"
@@ -1668,7 +1664,6 @@ Application.ScreenUpdating = True
 End Sub
 
 Sub CopyTime2() 'Ctrl+Shift+B
-Attribute CopyTime2.VB_ProcData.VB_Invoke_Func = "B\n14"
 Dim i As Variant
 Dim j As Variant
 Dim str As String
@@ -1683,7 +1678,7 @@ Application.ScreenUpdating = False
 'm = Sheets("So Phau thuat").UsedRange.Rows(Sheets("So Phau thuat").UsedRange.Rows.Count).Row
 m = Sheets("Cacche1").Cells(6, 15)
 
-For i = 1 To Sheets.Count
+For i = 1 To Sheets.count
     str = Sheets(i).Name
         If str = "So Phau thuat" Then
             a = 1
@@ -1931,4 +1926,5 @@ Sub Changelog()
 'Ver:54
 'Ver:64 them loc trung gio nguoi phu, doi mau cot Z-AB
 'Ver:65 Them CacChe CâyChi
+'Ver:66 Xóa côt 9+10 trong sheets
 End Sub
